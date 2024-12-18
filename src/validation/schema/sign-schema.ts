@@ -1,9 +1,5 @@
 import z from "zod";
 
-const userNameZodObject = z.string()
-  .min(1, {message: "O nome deve ser preenchido."})
-  .max(36, {message: "O campo de nome só permite até 36 caracteres."})
-
 const emailZodObject = z.string()
   .min(1, {message: "O email deve ser preenchido."})
   .max(36, {message: "O campo de email só permite até 36 caracteres."})
@@ -16,7 +12,6 @@ const passwordZodObject = z.string()
   .regex(/\d/, {message: "A senha deve conter pelo menos um dígito"})
 
 export const signupSchema = z.object({
-  name: userNameZodObject,
   email: emailZodObject,
   password: passwordZodObject,
   confirmPassword: passwordZodObject
