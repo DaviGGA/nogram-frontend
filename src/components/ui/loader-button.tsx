@@ -5,7 +5,7 @@ export function LoaderButton(props: ButtonProps & {isLoading: boolean}) {
   return (
     <Button disabled={props.isLoading && props.disabled} {...props}>
       {props.isLoading ? <Loader2 className="mr-2 h-6 w-6 animate-spin"/> : null}
-      Salvar
+      {props.children}
     </Button>
   )
 }

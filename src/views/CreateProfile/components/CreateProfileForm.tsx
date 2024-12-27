@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { signupSchema, SignupSchema } from "@/validation/schema/sign-schema";
 import {
   Form,
   FormControl,
@@ -12,15 +11,16 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input";
 import { LoaderButton } from "@/components/ui/loader-button";
+import { createProfileSchema, CreateProfileSchema } from "@/validation/schema/create-profile-schema";
 
 type Props = {
-  onSubmit: (fields: SignupSchema) => Promise<void>
+  onSubmit: (fields: CreateProfileSchema) => Promise<void>
 }
 
-export function SignupForm({onSubmit}: Props) {
+export function CreateProfileForm({onSubmit}: Props) {
   
-  const form = useForm<SignupSchema>({
-    resolver: zodResolver(signupSchema)
+  const form = useForm<CreateProfileSchema>({
+    resolver: zodResolver(createProfileSchema)
   })
 
   return (
@@ -28,28 +28,15 @@ export function SignupForm({onSubmit}: Props) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
         <FormField
           control={form.control}
-          name="email"
+          name="username"
           render={({field}) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Nome de usuário</FormLabel>
               <FormControl>
-                <Input className="bg-white-400 p-5" placeholder="Insira seu email" {...field} />
-              </FormControl>
-              <FormMessage/>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({field}) => (
-            <FormItem>
-              <FormLabel>Senha</FormLabel>
-              <FormControl>
-                <Input className="bg-white-400 p-5" type="password" placeholder="Insira sua senha" {...field} />
+                <Input className="bg-white-400 p-5" placeholder="Insira aqui seu apelido na plataforma" {...field} />
               </FormControl>
               <FormDescription>
-              Senhas devem conter ao menos um caractere especial e um dígito.
+              Pode incluir caracteres especiais e números
               </FormDescription>
               <FormMessage/>
             </FormItem>
@@ -57,16 +44,26 @@ export function SignupForm({onSubmit}: Props) {
         />
         <FormField
           control={form.control}
-          name="confirmPassword"
+          name="first_name"
           render={({field}) => (
             <FormItem>
-              <FormLabel>Confirme a senha</FormLabel>
+              <FormLabel>Nome</FormLabel>
               <FormControl>
-                <Input className="bg-white-400 p-5" type="password" placeholder="Confirme a sua senha" {...field} />
+                <Input className="bg-white-400 p-5" placeholder="Insira aqui o seu nome" {...field} />
               </FormControl>
-              <FormDescription>
-              As senhas devem coincidir
-              </FormDescription>
+              <FormMessage/>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="surname"
+          render={({field}) => (
+            <FormItem>
+              <FormLabel>Sobrenome</FormLabel>
+              <FormControl>
+                <Input className="bg-white-400 p-5" placeholder="Insira aqui o seu sobrenome" {...field} />
+              </FormControl>
               <FormMessage/>
             </FormItem>
           )}
@@ -75,7 +72,7 @@ export function SignupForm({onSubmit}: Props) {
           className="w-full"
           type="submit"
           isLoading={false}>
-          Criar conta
+          Criar perfil
         </LoaderButton>
       </form>
     </Form>

@@ -1,10 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { signupSchema, SignupSchema } from "@/validation/schema/sign-schema";
+import { loginSchema, LoginSchema } from "@/validation/schema/login-schema";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,13 +13,13 @@ import { Input } from "@/components/ui/input";
 import { LoaderButton } from "@/components/ui/loader-button";
 
 type Props = {
-  onSubmit: (fields: SignupSchema) => Promise<void>
+  onSubmit: (fields: LoginSchema) => Promise<void>
 }
 
-export function SignupForm({onSubmit}: Props) {
+export function LoginForm({onSubmit}: Props) {
   
-  const form = useForm<SignupSchema>({
-    resolver: zodResolver(signupSchema)
+  const form = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema)
   })
 
   return (
@@ -48,25 +47,6 @@ export function SignupForm({onSubmit}: Props) {
               <FormControl>
                 <Input className="bg-white-400 p-5" type="password" placeholder="Insira sua senha" {...field} />
               </FormControl>
-              <FormDescription>
-              Senhas devem conter ao menos um caractere especial e um dígito.
-              </FormDescription>
-              <FormMessage/>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          render={({field}) => (
-            <FormItem>
-              <FormLabel>Confirme a senha</FormLabel>
-              <FormControl>
-                <Input className="bg-white-400 p-5" type="password" placeholder="Confirme a sua senha" {...field} />
-              </FormControl>
-              <FormDescription>
-              As senhas devem coincidir
-              </FormDescription>
               <FormMessage/>
             </FormItem>
           )}
@@ -75,7 +55,7 @@ export function SignupForm({onSubmit}: Props) {
           className="w-full"
           type="submit"
           isLoading={false}>
-          Criar conta
+          Entrar
         </LoaderButton>
       </form>
     </Form>

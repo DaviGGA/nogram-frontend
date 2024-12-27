@@ -25,15 +25,13 @@ export const handleError = (error: unknown) => {
   
 
 
-// const getAuthToken = () => localStorage.getItem("accessToken"); 
+const getAuthToken = () => localStorage.getItem("accessToken"); 
 
-// api.interceptors.request.use(function (config) {
-//   const token = getAuthToken()
-//   if(token) {
-//     config.headers.Authorization = `${localStorage.getItem('accessToken')}`
-//   }
-//   return config;
-// }, function (error) {
-//   // Do something with request error
-//   return Promise.reject(error);
-// });
+api.interceptors.request.use(function (config) {
+  const token = getAuthToken()
+  if(token) config.headers.Authorization = `Bearer ${token}`
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});

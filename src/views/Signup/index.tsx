@@ -2,11 +2,12 @@ import { SignupForm } from "./components/SignupForm";
 import { SignupSchema } from "@/validation/schema/sign-schema";
 import * as UserService from "@/api/user-service";
 import { useToast } from "@/hooks/use-toast";
-import { ApiErrors } from "@/errors/ApiErrors";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Signup() {
 
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   async function onSubmitCreateAccount(values: SignupSchema) {
 
@@ -22,17 +23,38 @@ export function Signup() {
     const [err, response] = await UserService.createUser(values);
 
     if(err) {
-      const toastMessage = ApiErrors[err.name];
-
       toast({
-        title: toastMessage.title,
-        description: toastMessage.description,
+        title: "Erro ao criar a conta",
+        description: "Algo ocorreu e não foi possível criar sua conta.",
         variant: "destructive"
       })
-      return
+      return 
     }
 
-    console.log(response.data);
+    if(response) {
+      toast({
+        title: "Conta criada",
+        description: "Sua conta foi criada com sucesso! Bem-vindo!"
+      })
+
+      const[err, response] = await UserService.login(values);
+
+      if(err) {
+        toast({
+          title: "Erro ao logar",
+          description: "Algo ocorreu e não foi possível logar na sua conta.",
+          variant: "destructive"
+        })
+        return
+      }
+
+      if(response) {
+        localStorage.setItem("accessToken", response.data.token);
+        navigate("/create-profile");
+      }
+
+    }
+
   }
 
   return (
@@ -40,7 +62,9 @@ export function Signup() {
       <div className="w-1/4 mx-auto">
         <div className="mb-3">
           <h1 className="text-5xl text-center font-extrabold text-gray-900">Crie sua conta</h1>
-          <p className="text-center">Ou <span className="font-medium text-primary hover:text-primary-dark">logue na sua conta existente</span></p>
+          <p className="text-center">Ou {" "}
+            <Link to={"/login"} className="font-medium text-primary hover:text-primary-dark">logue na sua conta existente</Link>
+          </p>
         </div>
         <SignupForm
         onSubmit={onSubmitCreateAccount}

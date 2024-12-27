@@ -1,15 +1,27 @@
 
 import './App.css'
 import { Toaster } from './components/ui/toaster'
-import { Signup } from './views/Signup'
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import  {routes, RouteElement } from "@/routes/routes";
 
 function App() {
   
-
   return (
     <>
       <Toaster/>
-      <Signup/>
+      <Router>
+        <Routes>
+          {
+            routes.map((route: RouteElement, idx: number) =>
+              <Route
+                key={idx}
+                path={route.path}
+                element={route.element}
+              />
+            )
+          }
+        </Routes>
+      </Router>
     </>
   )
 }
