@@ -1,4 +1,5 @@
 import { CreateProfile } from "@/views/CreateProfile"
+import { Home } from "@/views/Home"
 import { Login } from "@/views/Login"
 import { Signup } from "@/views/Signup"
 import { ReactElement } from "react"
@@ -23,6 +24,6 @@ export const routes: RouteElement[] = [
   },
   {
     path: "/home",
-    element: <div>HOME</div>
+    element: <Home/>
   }
 ]

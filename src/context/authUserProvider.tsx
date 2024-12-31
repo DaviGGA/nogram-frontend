@@ -1,7 +1,7 @@
 import { createContext, useContext, ReactNode, useState, useEffect } from "react";
-import { Profile } from "@/types/Profile";
+import { Profile } from "@/models/profile";
 import * as userService from "@/api/user-service";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { User } from "@/models/user";
 
 interface AuthProviderProps {
@@ -21,7 +21,6 @@ export const AuthUserContext = createContext<AuthContextData>(
 
 export const AuthUserProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [user, setUser] = useState<User | undefined>();
@@ -40,7 +39,7 @@ export const AuthUserProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [userErr, userResponse] = await userService.getLoggedUser();
 
     if(userErr) {
-      navigate("/login")
+      window.location.href = "/login"
       return
     }
 
@@ -54,7 +53,7 @@ export const AuthUserProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [profileErr, profileResponse] = await userService.getLoggedUserProfile();
 
     if(profileErr) {
-      navigate("/create-profile");
+      window.location.href = "/create-profile"
       return
     }
 

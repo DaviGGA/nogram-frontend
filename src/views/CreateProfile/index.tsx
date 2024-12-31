@@ -6,6 +6,7 @@ import { ChangeEvent, useRef, useState } from "react";
 import blankProfile from "@/assets/imgs/blank-profile-picture.png";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import { onChangeImage } from "@/utils/onChangeImage";
 
 
 export function CreateProfile() {
@@ -43,17 +44,8 @@ export function CreateProfile() {
         })     
       }
 
-      //navigate("/home");
+      navigate("/home");
     }
-  }
-
-  function onChangeImage(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files![0];
-    
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => setImagePreview(reader.result as string);
-    setImageFile(file);
   }
 
   return (
@@ -63,7 +55,7 @@ export function CreateProfile() {
           <h1 className="text-4xl text-center font-extrabold text-gray-900">Falta só mais um pouco!</h1>
           <p className="text-center mt-2">Assim que criarmos o seu perfil você já vai poder usar a plataforma</p>
         </div>
-        <input name="image" type="file" ref={imageInputRef} className="w-0 h-0" onChange={onChangeImage}/>
+        <input name="image" type="file" ref={imageInputRef} className="w-0 h-0" onChange={ e => onChangeImage(e, setImageFile, setImagePreview)}/>
         <Avatar className="w-[160px] h-[160px] cursor-pointer mx-auto" onClick={() => imageInputRef.current?.click()}>
             <AvatarImage src={imagePreview ? imagePreview : blankProfile}/>
         </Avatar>

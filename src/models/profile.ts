@@ -1,5 +1,6 @@
 export type Profile = {
   first_name: string,
   surname: string,
-  username: string
+  username: string,
+  image?: string | undefined
 }
