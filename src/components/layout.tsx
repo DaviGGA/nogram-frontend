@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const location = useLocation();
 
-  if (["/login", "/create-profile"].includes(location.pathname)) {
+  if (["/login", "/create-profile", "/signup"].includes(location.pathname)) {
     return (
       <>{children}</>
     )

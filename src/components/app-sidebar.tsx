@@ -42,7 +42,7 @@ export function AppSidebar() {
         <SidebarHeader>
           <div className="flex items-center space-x-4">
             <Avatar className="w-[64px] h-[64px]">
-              <AvatarImage src={profileImage} alt="@shadcn" />
+              <AvatarImage src={profileImage} alt={profile?.username} />
             </Avatar>
             <div>
               <p className="text-xl font-bold">{profile?.first_name}</p>
