@@ -1,7 +1,7 @@
 import { Post } from "@/models/post";
 import { BlobResponse, ServiceResponse, SuccessResponse } from "@/types/ApiResponse";
 import { api, handleError } from "./axios";
-import { PostProfile } from "@/models/post-profile";
+import { FeedPost } from "@/models/feed-post";
 
 export async function createPost(description: string | undefined, image: File): ServiceResponse<Post> {
 
@@ -19,9 +19,9 @@ export async function createPost(description: string | undefined, image: File): 
   }
 }
 
-export async function getFeed(): ServiceResponse<PostProfile[]> {
+export async function getFeed(): ServiceResponse<FeedPost[]> {
   try {
-    const response = await api.get<SuccessResponse<PostProfile[]>>("/post/feed");
+    const response = await api.get<SuccessResponse<FeedPost[]>>("/post/feed");
     return [null, response.data];
   } catch (error) {
     console.log(error);
