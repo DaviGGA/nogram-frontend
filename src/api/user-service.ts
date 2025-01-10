@@ -3,6 +3,7 @@ import { api, handleError } from "./axios";
 import { BlobResponse, ServiceResponse, SuccessResponse } from "@/types/ApiResponse";
 import { Token } from "@/models/token";
 import { Profile } from "@/models/profile";
+import { Entity } from "@/types/Entity";
 
 export async function createUser(user: User): ServiceResponse<User> {
   try {
@@ -55,9 +56,9 @@ export async function uploadProfileImage(profileId: number, image: File) {
   }
 }
 
-export async function getLoggedUser(): ServiceResponse<User> {
+export async function getLoggedUser(): ServiceResponse<Entity<User>> {
   try {
-    const response = await api.get<SuccessResponse<User>>("/profile/user/me");
+    const response = await api.get<SuccessResponse<Entity<User>>>("/profile/user/me");
     return [null, response.data];
   } catch (error) {
     console.log(error);
@@ -65,9 +66,9 @@ export async function getLoggedUser(): ServiceResponse<User> {
   }
 }
 
-export async function getLoggedUserProfile(): ServiceResponse<Profile> {
+export async function getLoggedUserProfile(): ServiceResponse<Entity<Profile>> {
   try {
-    const response = await api.get<SuccessResponse<Profile>>("/profile/me");
+    const response = await api.get<SuccessResponse<Entity<Profile>>>("/profile/me");
     return [null, response.data];
   } catch (error) {
     console.log(error);
@@ -86,3 +87,14 @@ export async function getProfileImage(image: string): BlobResponse {
     return [handleError(error), null];
   }
 }
+
+export async function getProfileByUsername(username: string): ServiceResponse<Entity<Profile>> {
+  try {
+    const response = await api.get<SuccessResponse<Entity<Profile>>>(`profile/${username}`)
+    return [null, response.data];
+  } catch (error) {
+    console.log(error);
+    return [handleError(error), null];
+  }
+}
+

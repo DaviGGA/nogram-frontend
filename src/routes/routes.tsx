@@ -1,6 +1,7 @@
 import { CreateProfile } from "@/views/CreateProfile"
 import { Home } from "@/views/Home"
 import { Login } from "@/views/Login"
+import { ProfilePage } from "@/views/ProfilePage"
 import { Signup } from "@/views/Signup"
 import { ReactElement } from "react"
 
@@ -25,5 +26,9 @@ export const routes: RouteElement[] = [
   {
     path: "/home",
     element: <Home/>
+  },
+  {
+    path: "/profile/:username",
+    element: <ProfilePage/>
   }
 ]

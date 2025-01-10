@@ -2,13 +2,14 @@ import { HomePost } from "@/components/HomePost"
 import * as PostService from "@/api/post-service"
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
-import { PostProfile } from "@/models/post-profile";
+import { FeedPost } from "@/models/feed-post";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function Home() {
 
   const {toast} = useToast();
 
-  const [posts, setPosts] = useState<PostProfile[]>([]);
+  const [posts, setPosts] = useState<FeedPost[]>([]);
 
 
   useEffect(() => {
@@ -30,12 +31,14 @@ export function Home() {
 
 
   return (
-    <div>
-      {
-        posts.map((post, idx) => {
-          return <HomePost key={idx} post={post}/>
-        })
-      }
-    </div>
+    <ScrollArea className="h-screen px-10">
+      <div className="flex flex-col gap-10">
+        {
+          posts.map((post, idx) => {
+            return <HomePost key={idx} post={post}/>
+          })
+        }
+      </div>
+    </ScrollArea>
   )
 }

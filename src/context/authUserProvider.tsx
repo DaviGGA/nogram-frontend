@@ -3,6 +3,7 @@ import { Profile } from "@/models/profile";
 import * as userService from "@/api/user-service";
 import { useLocation } from "react-router-dom";
 import { User } from "@/models/user";
+import { Entity } from "@/types/Entity";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -23,8 +24,8 @@ export const AuthUserProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const location = useLocation();
 
-  const [user, setUser] = useState<User | undefined>();
-  const [profile, setProfile] = useState<Profile | undefined>();
+  const [user, setUser] = useState<Entity<User> | undefined>();
+  const [profile, setProfile] = useState<Entity<Profile> | undefined>();
 
   useEffect(() => {
 
