@@ -31,14 +31,16 @@ export function Home() {
 
 
   return (
-    <ScrollArea className="h-screen px-10">
-      <div className="flex flex-col gap-10">
-        {
-          posts.map((post, idx) => {
-            return <HomePost key={idx} post={post}/>
-          })
-        }
-      </div>
-    </ScrollArea>
+    <div className="w-full flex justify-center">
+      <ScrollArea className="h-screen px-10">
+        <div className="flex flex-col gap-10">
+          {
+            posts.map((post, idx) => {
+              return <HomePost key={idx} post={post}/>
+            })
+          }
+        </div>
+      </ScrollArea>
+    </div>
   )
 }

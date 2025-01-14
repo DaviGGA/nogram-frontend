@@ -18,8 +18,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       <AppSidebar/>
       <SidebarTrigger />
-      <main className="w-full flex justify-center">
-        <div className="mt-10">
+      <main className="w-full">
+        <div className="w-full mt-10">
           {children}
         </div>
       </main>

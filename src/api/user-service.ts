@@ -88,9 +88,10 @@ export async function getProfileImage(image: string): BlobResponse {
   }
 }
 
-export async function getProfileByUsername(username: string): ServiceResponse<Entity<Profile>> {
+export type ProfileUserResponse = Entity<Profile> & Entity<Omit<User,"password">>
+export async function getProfileByUsername(username: string): ServiceResponse<ProfileUserResponse> {
   try {
-    const response = await api.get<SuccessResponse<Entity<Profile>>>(`profile/${username}`)
+    const response = await api.get<SuccessResponse<ProfileUserResponse>>(`profile/${username}`)
     return [null, response.data];
   } catch (error) {
     console.log(error);

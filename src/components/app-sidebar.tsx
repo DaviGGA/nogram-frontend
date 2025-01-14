@@ -12,7 +12,7 @@ import {
 import { Avatar, AvatarImage } from "./ui/avatar"
 import { useAuthUserContext } from "@/context/authUserProvider";
 import { useProfileImage } from "@/hooks/use-profile-image";
-import { Home, SquarePlus } from "lucide-react";
+import { Home, SquarePlus, Mail } from "lucide-react";
 import { useState } from "react";
 import { CreatePostDialog } from "./create-post-dialog";
 
@@ -21,6 +21,11 @@ const items = [
     title: "Home",
     url: "/home",
     icon: Home
+  },
+  {
+    title: "Mensagens",
+    url: "/messages",
+    icon: Mail
   }
 ]
 
